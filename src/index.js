@@ -2,23 +2,38 @@ var debounce = require('lodash.debounce');
 import refs from './js/refs';
 import apiService from './js/apiService';
 import renderingResult from './js/renderingResult';
+// import spinner from './js/spinner';
 import './styles.css';
-
-let page = 1;
 
 refs.searchForm.addEventListener(
   'input',
   debounce(event => {
-    const inputString = event.target.value;
-    console.log(inputString);
+    apiService.userQuery = event.target.value;
 
     refs.finder.innerHTML = '';
-    page = 1;
+    apiService.resetPage();
 
-    if (inputString.length > 0) {
-      apiService(inputString, page).then(renderingResult);
+    if (apiService.userQuery.length > 0) {
+      //   spinner.spin();
+      apiService.fetchCards().then(renderingResult);
     } else {
       refs.finder.innerHTML = '';
+      refs.moreButton.classList.remove('isOn');
     }
-  }, 800),
+  }, 500),
 );
+
+refs.moreButton.addEventListener('click', () => {
+  apiService.fetchCards().then(renderingResult);
+
+  setTimeout(function () {
+    window.scrollTo(0, document.documentElement.offsetHeight);
+  }, 1);
+
+  // Не работает :((
+  //  console.log(document.documentElement.offsetHeight);
+  // window.scrollTo({
+  //     top: document.documentElement.offsetHeight,
+  //     behavior: 'smooth',
+  // });
+});
