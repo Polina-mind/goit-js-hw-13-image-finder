@@ -24,16 +24,13 @@ refs.searchForm.addEventListener(
 );
 
 refs.moreButton.addEventListener('click', () => {
-  apiService.fetchCards().then(renderingResult);
-
-  setTimeout(function () {
-    window.scrollTo(0, document.documentElement.offsetHeight);
-  }, 1);
-
-  // Не работает :((
-  //  console.log(document.documentElement.offsetHeight);
-  // window.scrollTo({
-  //     top: document.documentElement.offsetHeight,
-  //     behavior: 'smooth',
-  // });
+  let height;
+  apiService.fetchCards()
+      .finally(() => height = document.documentElement.offsetHeight)
+      .then(renderingResult)
+      .then(() => window.scrollTo({
+        top: height,
+        behavior: 'smooth',
+        })
+      );  
 });
