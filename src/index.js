@@ -1,5 +1,4 @@
-import { alert } from '@pnotify/core/dist/PNotify.js';
-// import { emptyStringAlert } from './js/notification';
+import { emptyStringAlert } from './js/notification';
 import refs from './js/refs';
 import apiService from './js/apiService';
 import renderingResult from './js/renderingResult';
@@ -19,11 +18,7 @@ refs.searchForm.addEventListener('submit', event => {
     refs.finder.innerHTML = '';
     refs.moreButton.classList.remove('isOn');
 
-    // emptyStringAlert;
-    alert({
-      text: 'Find nothing! Please input your query!',
-      delay: 2000,
-    });
+    emptyStringAlert();
   }
 });
 

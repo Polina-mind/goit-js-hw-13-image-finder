@@ -9,22 +9,27 @@ import { alert } from '@pnotify/core';
 
 defaults.styling = 'material';
 defaults.icons = 'material';
-
 defaultModules.set(PNotifyMobile, {});
 
-const emptyStringAlert = alert({
-  text: 'Find nothing! Please input your query!',
-  delay: 2000,
-});
+function emptyStringAlert() {
+  alert({
+    text: 'Find nothing! Please input your query!',
+    delay: 2000,
+  });
+}
 
-const invalidRequestAlert = alert({
-  text: 'Invalid request, try again!',
-  delay: 2000,
-});
+function invalidRequestAlert() {
+  alert({
+    text: 'Invalid request, try again!',
+    delay: 2000,
+  });
+}
 
-const noPicturesAlert = alert({
-  text: 'No more pictures...',
-  delay: 2000,
-});
+function noPicturesAlert() {
+  alert({
+    text: 'No more pictures...',
+    delay: 2000,
+  });
+}
 
 export { emptyStringAlert, invalidRequestAlert, noPicturesAlert };
